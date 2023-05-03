@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}OpenAI prompt{% endblock %}
+
+{% block body %}
+<h1>OpenAI prompt</h1>
+
+{% if title is defined and title is not null and content is defined and content is not null %}
+    <h3>{{ title }}</h3>
+    <p>{{ content }}</p>
+
+    <form action="/mvc/post/save" method="post">
+        <input type="text" id="title" name="title" value="{{ title }}" style="display: none;">
+        <textarea id="content" name="content" style="display: none;">{{ content }}</textarea>
+        <input type="submit" value="Save">
+        <a href="/mvc/" class="button">Discard</a>
+    </form>
+{% else %}
+    <p>Enter a title for a post and press 'Generate' to generate content:</p>
+
+    <form method="post">
+        <label for="title">Enter a title:</label>
+        <textarea id="title" name="title"></textarea>
+        <input type="submit" value="Generate">
+    </form>
+{% endif %}
+
+{% endblock %}
